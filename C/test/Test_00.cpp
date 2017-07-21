@@ -52,6 +52,12 @@ int main(int argc, char** argv) {
 		Thread_Data[tid].val       =   1;
 	}
 
+#ifdef __USE_GNU
+	TPool.SetAffinity(0); // TPool's thread to Core-0.
+	for (int i = 0; i < MAX_THREADS-1; i++)
+		TPool.SetAffinity(i+1, i); // Threads 0,1,2 to Cores 1,2,3.
+#endif
+
 	for (int tid = MAX_THREADS-1; tid >= 1; tid--)
 		TPool.AddTask(&Thread_Data[tid]);
 

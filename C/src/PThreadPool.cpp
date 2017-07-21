@@ -66,7 +66,7 @@ PThreadPool::PThreadPool() {
 PThreadPool::~PThreadPool() {
 	Shutdown();
 }
-	
+
 void PThreadPool::Initialize(
 	void* (*task_func)(void*),
 	size_t number_of_threads,
@@ -94,6 +94,32 @@ void PThreadPool::Initialize(
 	}
 }
 
+#ifdef __USE_GNU
+int PThreadPool::SetAffinity(int core_id, int thread_id_) {
+	int s = -1;
+	cpu_set_t cpuset;
+	pthread_t thread;
+	bool ThreadFound = false;
+
+	if (thread_id_ < -1) return -2;
+
+	if (thread_id_ == -1) {
+		thread = pthread_self();
+		ThreadFound = true;
+	} else if (thread_id_ < (int)total_threads) {
+		thread = threads[thread_id_];
+		ThreadFound = true;
+	}
+
+	if (ThreadFound) {
+		CPU_ZERO(&cpuset);
+		CPU_SET((int)core_id, &cpuset);
+		s = pthread_setaffinity_np(thread, sizeof(cpu_set_t), &cpuset);
+	}
+
+	return s;
+}
+#endif
 
 void PThreadPool::AddTask(
 	void* data

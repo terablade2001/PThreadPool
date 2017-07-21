@@ -24,11 +24,15 @@
 #ifndef __TERABLADE2001_PTHREAD_POOL__
 #define __TERABLADE2001_PTHREAD_POOL__
 
-#define PTHREAD_POOL_Version (0.001)
+#define PTHREAD_POOL_Version (0.002)
 
 #include <cstdlib>
 #include <cstdio>
 #include <pthread.h>
+
+#ifdef __USE_GNU
+	#include <sched.h>
+#endif
 
 #ifndef __FNAME__
 	#include <cstring>
@@ -65,6 +69,9 @@ public:
 	void Execute(void* data);
 	void Wait(void);
 	void Shutdown(void);
+#ifdef __USE_GNU
+	int SetAffinity(int core_id, int thread_id_ = -1);
+#endif
 private:
 	void SetPriority();
 	static void* ThreadHandler(void *data);
