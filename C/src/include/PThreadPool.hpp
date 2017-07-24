@@ -24,7 +24,7 @@
 #ifndef __TERABLADE2001_PTHREAD_POOL__
 #define __TERABLADE2001_PTHREAD_POOL__
 
-#define PTHREAD_POOL_Version (0.002)
+#define PTHREAD_POOL_Version (0.003)
 
 #include <cstdlib>
 #include <cstdio>
@@ -63,7 +63,8 @@ public:
 	void Initialize(
 		void* (*task_func)(void*),
 		size_t number_of_threads,
-		int priority_ = 90
+		int priority_ = 90,
+		int scheduler_ = SCHED_FIFO
 	);
 	void AddTask(void* data);
 	void Execute(void* data);
@@ -82,6 +83,7 @@ private:
 	SQueue *q;
 	SQueue *lastq;
 	int priority;
+	int scheduler;
 	pthread_mutex_t q_mtx;
 	pthread_cond_t q_cnd;
 	pthread_attr_t attr;

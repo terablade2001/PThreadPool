@@ -61,6 +61,7 @@ PThreadPool::PThreadPool() {
 	q = NULL;
 	lastq = NULL;
 	threads = NULL;
+	scheduler = SCHED_FIFO;
 }
 
 PThreadPool::~PThreadPool() {
@@ -70,7 +71,8 @@ PThreadPool::~PThreadPool() {
 void PThreadPool::Initialize(
 	void* (*task_func)(void*),
 	size_t number_of_threads,
-	int priority_
+	int priority_,
+	int scheduler_
 ) {
 	Shutdown();
 
@@ -83,6 +85,7 @@ void PThreadPool::Initialize(
 	q = NULL;
 	lastq = NULL;
 	priority = priority_;
+	scheduler = scheduler_;
 	threads = new pthread_t[total_threads];
 
 	pthread_attr_init(&attr);
@@ -204,7 +207,7 @@ void PThreadPool::SetPriority() {
 	sched_param param;
 	pthread_attr_setinheritsched(&attr, PTHREAD_EXPLICIT_SCHED);
 	param.sched_priority = priority;
-	pthread_attr_setschedpolicy(&attr, SCHED_FIFO);
+	pthread_attr_setschedpolicy(&attr, scheduler);
 	pthread_attr_setschedparam(&attr, &param);
 }
 
