@@ -1,6 +1,6 @@
 // MIT License
 
-// Copyright (c) 2017 Vasileios Kon. Pothos (terablade2001)
+// Copyright (c) 2017-2019 Vasileios Kon. Pothos (terablade2001)
 // https://github.com/terablade2001/PThreadPool
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,7 +24,7 @@
 #ifndef __TERABLADE2001_PTHREAD_POOL__
 #define __TERABLADE2001_PTHREAD_POOL__
 
-#define PTHREAD_POOL_Version (0.003)
+#define PTHREAD_POOL_Version (0.004)
 
 #include <cstdlib>
 #include <cstdio>
@@ -36,7 +36,8 @@
 
 #ifndef __FNAME__
 	#include <cstring>
-	#define __FNAME__ (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
+	#define __FNAMEBSL__ (strrchr(__FILE__, '\\') ? strrchr(__FILE__, '\\') + 1 : __FILE__)
+	#define __FNAME__ (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FNAMEBSL__ )
 #endif
 
 
