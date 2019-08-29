@@ -68,12 +68,13 @@ PThreadPool::~PThreadPool() {
 	Shutdown();
 }
 
-void PThreadPool::Initialize(
+int PThreadPool::Initialize(
 	void* (*task_func)(void*),
 	size_t number_of_threads,
 	int priority_,
 	int scheduler_
 ) {
+	if (number_of_threads <= 0) return -1;
 	Shutdown();
 
 	pthread_mutex_init(&q_mtx, NULL);
@@ -95,6 +96,7 @@ void PThreadPool::Initialize(
 	for (size_t i = 0; i < total_threads; i++) {
 		pthread_create(&threads[i], &attr, &ThreadHandler, this);
 	}
+	return 0;
 }
 
 #ifdef __USE_GNU

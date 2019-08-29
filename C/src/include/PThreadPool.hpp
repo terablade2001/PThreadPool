@@ -24,7 +24,7 @@
 #ifndef __TERABLADE2001_PTHREAD_POOL__
 #define __TERABLADE2001_PTHREAD_POOL__
 
-#define PTHREAD_POOL_Version (0.004)
+#define PTHREAD_POOL_Version (0.005)
 
 #include <cstdlib>
 #include <cstdio>
@@ -61,7 +61,7 @@ public:
 	PThreadPool();
 	~PThreadPool();
 	
-	void Initialize(
+	int Initialize(
 		void* (*task_func)(void*),
 		size_t number_of_threads,
 		int priority_ = 90,
