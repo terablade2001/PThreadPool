@@ -1,8 +1,8 @@
 # cmake -G "CodeLite - MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release ..
 # cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release ..
 # cmake -DCMAKE_BUILD_TYPE=Release ..
-set(CMAKE_C_COMPILER "c:/TDM-GCC-64/bin/x86_64-w64-mingw32-gcc-5.1.0.exe")
-set(CMAKE_CXX_COMPILER "c:/TDM-GCC-64/bin/x86_64-w64-mingw32-g++.exe")
+# set(CMAKE_C_COMPILER "c:/TDM-GCC-64/bin/x86_64-w64-mingw32-gcc-5.1.0.exe")
+# set(CMAKE_CXX_COMPILER "c:/TDM-GCC-64/bin/x86_64-w64-mingw32-g++.exe")
 
 cmake_minimum_required(VERSION 2.8.11)
 
@@ -25,12 +25,17 @@ set(CMAKE_SHARED_LINKER_FLAGS "-Wl,--no-undefined")
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
-set (CXX_SRCS
-	${CMAKE_CURRENT_LIST_DIR}/C/src/include/PThreadPool.hpp
-	${CMAKE_CURRENT_LIST_DIR}/C/src/PThreadPool.cpp
-	${CMAKE_CURRENT_LIST_DIR}/C/test/Test_00.cpp
-)
+# set (CXX_SRCS
+# 	${CMAKE_CURRENT_LIST_DIR}/C/src/include/PThreadPool.hpp
+# 	${CMAKE_CURRENT_LIST_DIR}/C/src/PThreadPool.cpp
+# 	${CMAKE_CURRENT_LIST_DIR}/C/test/Test_00.cpp
+# )
 
+set (CXX_SRCS
+	${CMAKE_CURRENT_LIST_DIR}/C/src/include/STDThreadPool.hpp
+	${CMAKE_CURRENT_LIST_DIR}/C/src/STDThreadPool.cpp
+	${CMAKE_CURRENT_LIST_DIR}/C/test/Test_01.cpp
+)
 
 add_executable(PThreadPool ${CXX_SRCS})
 target_link_libraries(PThreadPool ${LINK_OPTIONS})
