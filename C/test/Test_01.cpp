@@ -20,9 +20,10 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-
+#ifdef VKP_USE_STDTHREAD_POOL
 #include "../src/include/STDThreadPool.hpp"
 #include <stdint.h>
+#include <iostream>
 
 #define MAX_THREADS (4)
 
@@ -44,6 +45,7 @@ void* Thread_Execute(void* data) {
 
 
 int main(int argc, char** argv) {
+	std::cout << "Using 'STDThreadPool'..." << std::endl;
 	STDThreadPool TPool;
 	TPool.Initialize(Thread_Execute, MAX_THREADS-1);
 
@@ -63,3 +65,4 @@ int main(int argc, char** argv) {
 
 	return 0;
 }
+#endif

@@ -10,7 +10,7 @@
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
 
-// The above copyright notice and this permission notice shall be included 
+// The above copyright notice and this permission notice shall be included
 // in all copies or substantial portions of the Software.
 
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -21,10 +21,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef __TERABLADE2001_PTHREAD_POOL__
-#define __TERABLADE2001_PTHREAD_POOL__
+#pragma once
+#include "ThreadPoolSetup.hpp"
 
-#define PTHREAD_POOL_Version (0.005)
+#ifdef VKP_USE_PTHREAD_POOL
 
 #include <cstdlib>
 #include <cstdio>
@@ -60,7 +60,7 @@ class PThreadPool {
 public:
 	PThreadPool();
 	~PThreadPool();
-	
+
 	int Initialize(
 		void* (*task_func)(void*),
 		size_t number_of_threads,
@@ -93,5 +93,4 @@ private:
 
 }; //namespace vkp
 
-
-#endif
+#endif // VKP_USE_PTHREAD_POOL

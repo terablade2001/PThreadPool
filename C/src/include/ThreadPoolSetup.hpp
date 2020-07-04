@@ -1,0 +1,4 @@
+#define VKP_THREAD_POOL_Version (0.007)
+
+// #define VKP_USE_PTHREAD_POOL
+// #define VKP_USE_STDTHREAD_POOL

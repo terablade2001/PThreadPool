@@ -10,7 +10,7 @@
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
 
-// The above copyright notice and this permission notice shall be included 
+// The above copyright notice and this permission notice shall be included
 // in all copies or substantial portions of the Software.
 
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -21,9 +21,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#ifdef VKP_USE_PTHREAD_POOL
 #include "../src/include/PThreadPool.hpp"
 #include <stdint.h>
 #include <unistd.h>
+#include <iostream>
+
 #define MAX_THREADS (4)
 
 using namespace vkp;
@@ -44,6 +47,7 @@ void* Thread_Execute(void* data) {
 
 
 int main(int argc, char** argv) {
+	std::cout << "Using 'PThreadPool'..." << std::endl;
 	PThreadPool TPool;
 	TPool.Initialize(Thread_Execute, MAX_THREADS-1, 92);
 
@@ -69,3 +73,4 @@ int main(int argc, char** argv) {
 
 	return 0;
 }
+#endif

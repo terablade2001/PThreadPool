@@ -22,7 +22,9 @@
 // SOFTWARE.
 
 #pragma once
+#include "ThreadPoolSetup.hpp"
 
+#ifdef VKP_USE_STDTHREAD_POOL
 #include <cstdlib>
 #include <cstdio>
 #include <thread>
@@ -83,4 +85,4 @@ private:
 
 }; //namespace vkp
 
-
+#endif // VKP_USE_STDTHREAD_POOL

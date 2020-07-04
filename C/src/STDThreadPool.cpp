@@ -23,6 +23,7 @@
 
 #include "include/STDThreadPool.hpp"
 
+#ifdef VKP_USE_STDTHREAD_POOL
 namespace vkp {
 
 SQueue::SQueue(void* data_) {
@@ -191,3 +192,4 @@ void* STDThreadPool::ThreadHandler(void *data) {
 }
 
 }; // namespace vkp
+#endif // VKP_USE_STDTHREAD_POOL
